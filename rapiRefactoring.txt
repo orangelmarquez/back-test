@@ -1,0 +1,27 @@
+Problemas
+
+1. El código no esta documentado, además tiene varios trozos de codigo comentados que confunden al lector.
+2. Parte del codigo documentado muestra como se encriptan los pwd, lo que podria ser una vulnerabilidad.
+3. En la funcion, se busca hasta 3 veces la variable "driver_id".
+4. La funcion parece estar sobre-cargada de funcionalidad no delegada, que ademas, ayudaria a entender lo que hace.
+5. El "Service" se actualizaba 2 veces cuando solo era necesario hacer un update.
+6. El proceso de retorno no es muy explicito.
+
+Mejoras
+
+1.  Se documentaron las funciones con nombre, parametros de entrada y tipo de retorno.
+    Ademas de eliminar los comentarios no informativos.
+
+2.  Fueron borrados los comentarios que hacian referencia a "pwd".
+
+3.  Se creó una variable local "$driver_id" con el resultado de la busqueda del "driver_id".
+
+4.  Se crearon 2 funciones de ayuda (helper functions), para hacer mas claro y limpio el proceso.
+    Esto ademas ayudara al momento de realizar pruebas. Podria crearse tal vez otra funcion para manejar las
+    actualizaciones, sin embargo, como desconozco el lenguaje, no puedo comprobar si funcionaria.
+
+5.  Se movio el "Driver::update" antes del "Service::update" para obtener la variable "$driverTmp"
+    necesaria para hacer la actualizacion que se hacia en segundo lugar y ahora se hace solo una vez.
+
+6.  La respuesta de la funcion no le dice al usuario verdaderamente que sucedio, sin embargo, se puede suponer que esto
+    se esta manejando en el FrontEnd.
